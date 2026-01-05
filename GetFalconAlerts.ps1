@@ -31,4 +31,4 @@ Get-FalconAlert -Filter "data_domains:'Endpoint'+created_timestamp:>='2026-01-01
         @{Name='Technique'; Expression={$_.mitre_attack.technique}},
         @{Name='Hostname'; Expression={$_.device.hostname}} |
     Sort-Object -Property created_timestamp -Descending|
-    Export-FalconReport C:\Temp\CrowdStrikeReport.csv
+    Export-FalconReport "C:\Temp\CrowdStrike Report Week $(Get-Date -UFormat %V).csv"
