@@ -22,11 +22,10 @@ if ($null -ne $AccessToken -and $AccessToken.Token -eq $true) {
 Get-FalconAlert -Filter "data_domains:'Endpoint'+created_timestamp:>='2026-01-01'+created_timestamp:<='2026-01-04'+severity_name:!'Informational'+product:'epp'" -Detailed |
     Select-Object -Property `
         @{Name='Date'; Expression={[DateTime]::Parse($_.created_timestamp).ToString('dd/MM/yyyy')}},
-        severity_name,
-        display_name,
-        filename,
-        filepath,
-        sha256,
+        @{Name='Severity'; Expression={$_.severity_name}},
+        @{Name='File Name'; Expression={$_.filename}},
+        @{Name='File Path'; Expression={$_.filepath}},
+        @{Name='SHA256'; Expression={$_.sha256}},
         @{Name='Tactic'; Expression={$_.mitre_attack.tactic}},
         @{Name='Technique'; Expression={$_.mitre_attack.technique}},
         @{Name='Hostname'; Expression={$_.device.hostname}} |
